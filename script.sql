@@ -1,71 +1,118 @@
--- Ex 03 com CASE
-DO $$
+-- Ex04 com CASE
+DO $$ 
 DECLARE
-	num1 INT := valor_aleatorio_entre(1,100);
-	num2 INT := valor_aleatorio_entre(1,100);
-	evento INT := valor_aleatorio_entre(1,4);
-	soma INT;
-	subtracao INT;
-	multiplicacao INT;
-	divisao NUMERIC(5,2);
+	valor_produto NUMERIC(5,2):= valor_aleatorio_entre(1,50);
+	lucro NUMERIC(5,2);
+	valor_venda NUMERIC(5,2);
 BEGIN
-	RAISE NOTICE '1- SOMA / 2- SUBTRACAO / 3- MULTIPLICACAO / 4- DIVISAO';
 	CASE 
-		WHEN evento = 1 THEN
-			RAISE NOTICE 'A operação selecionada foi: %', evento;
-			soma := num1 + num2;
-			RAISE NOTICE 'O resultado da soma entre % e % foi: %', num1, num2, soma;
-		WHEN evento = 2 THEN
-			RAISE NOTICE 'A operação selecionada foi: %', evento;
-			subtracao := num1 - num2;
-			RAISE NOTICE 'O resultado da subtração entre % e % foi: %', num1, num2, subtracao;
-		WHEN evento = 3 THEN
-			RAISE NOTICE 'A operação selecionada foi: %', evento;
-			multiplicacao := num1 * num2;
-			RAISE NOTICE 'O resultado da multiplicação entre % e % foi: %', num1, num2, multiplicacao;
-		WHEN evento = 4 THEN
-			RAISE NOTICE 'A operação selecionada foi: %', evento;
-			divisao := num1 / num2;
-			RAISE NOTICE 'O resultado da divisão entre % e % foi: %', num1, num2, divisao;		
-		ELSE
-			RAISE NOTICE 'ERRO...Tente novamente...';
+		WHEN valor_produto < 20 THEN
+		lucro := valor_produto * 0.45;
+		valor_venda := valor_produto + lucro;
+		RAISE NOTICE 'O produto custou: %', valor_produto;
+		RAISE NOTICE 'O lucro vai ser de: %', lucro;
+		RAISE NOTICE 'O valor da venda vai ser: %', valor_venda;
+	ELSE
+		lucro := valor_produto * 0.30;
+		valor_venda := valor_produto + lucro;
+		RAISE NOTICE 'O produto custou: %', valor_produto;
+		RAISE NOTICE 'O lucro vai ser de: %', lucro;
+		RAISE NOTICE 'O valor da venda vai ser: %', valor_venda;
 	END CASE;
 END;
 $$
 
--- Ex 03 com IF
+-- Ex04 com IF
 DO $$
 DECLARE
-	num1 INT := valor_aleatorio_entre(1,100);
-	num2 INT := valor_aleatorio_entre(1,100);
-	evento INT := valor_aleatorio_entre(1,4);
-	soma INT;
-	subtracao INT;
-	multiplicacao INT;
-	divisao NUMERIC(5,2);
+	valor_produto NUMERIC(5,2):= valor_aleatorio_entre(1,50);
+	lucro NUMERIC(5,2);
+	valor_venda NUMERIC(5,2);
 BEGIN
-	RAISE NOTICE '1- SOMA / 2- SUBTRACAO / 3- MULTIPLICACAO / 4- DIVISAO';
-	IF evento = 1 THEN
-		RAISE NOTICE 'A operação selecionada foi: %', evento;
-		soma := num1 + num2;
-		RAISE NOTICE 'O resultado da soma entre % e % foi: %', num1, num2, soma;
-	ELSIF evento = 2 THEN
-		RAISE NOTICE 'A operação selecionada foi: %', evento;
-		subtracao := num1 - num2;
-		RAISE NOTICE 'O resultado da subtração entre % e % foi: %', num1, num2, subtracao;
-	ELSIF evento = 3 THEN
-		RAISE NOTICE 'A operação selecionada foi: %', evento;
-		multiplicacao := num1 * num2;
-		RAISE NOTICE 'O resultado da multiplicação entre % e % foi: %', num1, num2, multiplicacao;
-	ELSIF evento = 4 THEN
-		RAISE NOTICE 'A operação selecionada foi: %', evento;
-		divisao := num1 / num2;
-		RAISE NOTICE 'O resultado da divisão entre % e % foi: %', num1, num2, divisao;
+	IF valor_produto < 20 THEN
+		lucro := valor_produto * 0.45;
+		valor_venda := valor_produto + lucro;
+		RAISE NOTICE 'O produto custou: %', valor_produto;
+		RAISE NOTICE 'O lucro vai ser de: %', lucro;
+		RAISE NOTICE 'O valor da venda vai ser: %', valor_venda;
 	ELSE
-		RAISE NOTICE 'ERRO...Tente novamente...';
+		lucro := valor_produto * 0.30;
+		valor_venda := valor_produto + lucro;
+		RAISE NOTICE 'O produto custou: %', valor_produto;
+		RAISE NOTICE 'O lucro vai ser de: %', lucro;
+		RAISE NOTICE 'O valor da venda vai ser: %', valor_venda;
 	END IF;
 END;
 $$
+
+-- Ex 03 com CASE
+-- DO $$
+-- DECLARE
+-- 	num1 INT := valor_aleatorio_entre(1,100);
+-- 	num2 INT := valor_aleatorio_entre(1,100);
+-- 	evento INT := valor_aleatorio_entre(1,4);
+-- 	soma INT;
+-- 	subtracao INT;
+-- 	multiplicacao INT;
+-- 	divisao NUMERIC(5,2);
+-- BEGIN
+-- 	RAISE NOTICE '1- SOMA / 2- SUBTRACAO / 3- MULTIPLICACAO / 4- DIVISAO';
+-- 	CASE 
+-- 		WHEN evento = 1 THEN
+-- 			RAISE NOTICE 'A operação selecionada foi: %', evento;
+-- 			soma := num1 + num2;
+-- 			RAISE NOTICE 'O resultado da soma entre % e % foi: %', num1, num2, soma;
+-- 		WHEN evento = 2 THEN
+-- 			RAISE NOTICE 'A operação selecionada foi: %', evento;
+-- 			subtracao := num1 - num2;
+-- 			RAISE NOTICE 'O resultado da subtração entre % e % foi: %', num1, num2, subtracao;
+-- 		WHEN evento = 3 THEN
+-- 			RAISE NOTICE 'A operação selecionada foi: %', evento;
+-- 			multiplicacao := num1 * num2;
+-- 			RAISE NOTICE 'O resultado da multiplicação entre % e % foi: %', num1, num2, multiplicacao;
+-- 		WHEN evento = 4 THEN
+-- 			RAISE NOTICE 'A operação selecionada foi: %', evento;
+-- 			divisao := num1 / num2;
+-- 			RAISE NOTICE 'O resultado da divisão entre % e % foi: %', num1, num2, divisao;		
+-- 		ELSE
+-- 			RAISE NOTICE 'ERRO...Tente novamente...';
+-- 	END CASE;
+-- END;
+-- $$
+
+-- Ex 03 com IF
+-- DO $$
+-- DECLARE
+-- 	num1 INT := valor_aleatorio_entre(1,100);
+-- 	num2 INT := valor_aleatorio_entre(1,100);
+-- 	evento INT := valor_aleatorio_entre(1,4);
+-- 	soma INT;
+-- 	subtracao INT;
+-- 	multiplicacao INT;
+-- 	divisao NUMERIC(5,2);
+-- BEGIN
+-- 	RAISE NOTICE '1- SOMA / 2- SUBTRACAO / 3- MULTIPLICACAO / 4- DIVISAO';
+-- 	IF evento = 1 THEN
+-- 		RAISE NOTICE 'A operação selecionada foi: %', evento;
+-- 		soma := num1 + num2;
+-- 		RAISE NOTICE 'O resultado da soma entre % e % foi: %', num1, num2, soma;
+-- 	ELSIF evento = 2 THEN
+-- 		RAISE NOTICE 'A operação selecionada foi: %', evento;
+-- 		subtracao := num1 - num2;
+-- 		RAISE NOTICE 'O resultado da subtração entre % e % foi: %', num1, num2, subtracao;
+-- 	ELSIF evento = 3 THEN
+-- 		RAISE NOTICE 'A operação selecionada foi: %', evento;
+-- 		multiplicacao := num1 * num2;
+-- 		RAISE NOTICE 'O resultado da multiplicação entre % e % foi: %', num1, num2, multiplicacao;
+-- 	ELSIF evento = 4 THEN
+-- 		RAISE NOTICE 'A operação selecionada foi: %', evento;
+-- 		divisao := num1 / num2;
+-- 		RAISE NOTICE 'O resultado da divisão entre % e % foi: %', num1, num2, divisao;
+-- 	ELSE
+-- 		RAISE NOTICE 'ERRO...Tente novamente...';
+-- 	END IF;
+-- END;
+-- $$
 
 -- Ex 02 com CASE
 -- DO $$
