@@ -1,49 +1,144 @@
--- Ex04 com CASE
-DO $$ 
+-- Ex05 com CASE
+DO $$
 DECLARE
-	valor_produto NUMERIC(5,2):= valor_aleatorio_entre(1,50);
-	lucro NUMERIC(5,2);
-	valor_venda NUMERIC(5,2);
+	salario NUMERIC := valor_aleatorio_entre(0,5000);
+	reajuste NUMERIC;
+	novo_salario NUMERIC;
+	percentual TEXT;
 BEGIN
-	CASE 
-		WHEN valor_produto < 20 THEN
-		lucro := valor_produto * 0.45;
-		valor_venda := valor_produto + lucro;
-		RAISE NOTICE 'O produto custou: %', valor_produto;
-		RAISE NOTICE 'O lucro vai ser de: %', lucro;
-		RAISE NOTICE 'O valor da venda vai ser: %', valor_venda;
-	ELSE
-		lucro := valor_produto * 0.30;
-		valor_venda := valor_produto + lucro;
-		RAISE NOTICE 'O produto custou: %', valor_produto;
-		RAISE NOTICE 'O lucro vai ser de: %', lucro;
-		RAISE NOTICE 'O valor da venda vai ser: %', valor_venda;
+	CASE
+		WHEN salario <= 400.00 THEN
+			reajuste := salario * 0.15;
+			novo_salario := salario + reajuste;
+			percentual := quote_literal('15%');
+			RAISE NOTICE 'Novo salário: %', novo_salario;
+			RAISE NOTICE 'Reajuste ganho: %', reajuste;
+			RAISE NOTICE 'Em percentual: %', percentual;
+		WHEN salario >= 400.01 AND salario <= 800.00 THEN
+			reajuste := salario * 0.12;
+			novo_salario := salario + reajuste;
+			percentual := quote_literal('12%');
+			RAISE NOTICE 'Novo salário: %', novo_salario;
+			RAISE NOTICE 'Reajuste ganho: %', reajuste;
+			RAISE NOTICE 'Em percentual: %', percentual;
+		WHEN salario >= 800.01 AND salario <= 1200.00 THEN
+			reajuste := salario * 0.10;
+			novo_salario := salario + reajuste;
+			percentual := quote_literal('10%');
+			RAISE NOTICE 'Novo salário: %', novo_salario;
+			RAISE NOTICE 'Reajuste ganho: %', reajuste;
+			RAISE NOTICE 'Em percentual: %', percentual;
+		WHEN salario >= 1200.01 AND salario <= 2000.00 THEN
+			reajuste := salario * 0.07;
+			novo_salario := salario + reajuste;
+			percentual := quote_literal('7%');
+			RAISE NOTICE 'Novo salário: %', novo_salario;
+			RAISE NOTICE 'Reajuste ganho: %', reajuste;
+			RAISE NOTICE 'Em percentual: %', percentual;
+		ELSE
+			reajuste := salario * 0.04;
+			novo_salario := salario + reajuste;
+			percentual := quote_literal('4%');
+			RAISE NOTICE 'Novo salário: %', novo_salario;
+			RAISE NOTICE 'Reajuste ganho: %', reajuste;
+			RAISE NOTICE 'Em percentual: %', percentual;
 	END CASE;
 END;
 $$
 
--- Ex04 com IF
+-- Ex05 com IF
 DO $$
 DECLARE
-	valor_produto NUMERIC(5,2):= valor_aleatorio_entre(1,50);
-	lucro NUMERIC(5,2);
-	valor_venda NUMERIC(5,2);
+	salario NUMERIC := valor_aleatorio_entre(0,5000);
+	reajuste NUMERIC;
+	novo_salario NUMERIC;
+	percentual TEXT;
 BEGIN
-	IF valor_produto < 20 THEN
-		lucro := valor_produto * 0.45;
-		valor_venda := valor_produto + lucro;
-		RAISE NOTICE 'O produto custou: %', valor_produto;
-		RAISE NOTICE 'O lucro vai ser de: %', lucro;
-		RAISE NOTICE 'O valor da venda vai ser: %', valor_venda;
+	IF salario <= 400.00 THEN
+		reajuste := salario * 0.15;
+		novo_salario := salario + reajuste;
+		percentual := quote_literal('15%');
+		RAISE NOTICE 'Novo salário: %', novo_salario;
+		RAISE NOTICE 'Reajuste ganho: %', reajuste;
+		RAISE NOTICE 'Em percentual: %', percentual;
+	ELSIF salario >= 400.01 AND salario <= 800.00 THEN
+		reajuste := salario * 0.12;
+		novo_salario := salario + reajuste;
+		percentual := quote_literal('12%');
+		RAISE NOTICE 'Novo salário: %', novo_salario;
+		RAISE NOTICE 'Reajuste ganho: %', reajuste;
+		RAISE NOTICE 'Em percentual: %', percentual;
+	ELSIF salario >= 800.01 AND salario <= 1200.00 THEN 
+		reajuste := salario * 0.10;
+		novo_salario := salario + reajuste;
+		percentual := quote_literal('10%');
+		RAISE NOTICE 'Novo salário: %', novo_salario;
+		RAISE NOTICE 'Reajuste ganho: %', reajuste;
+		RAISE NOTICE 'Em percentual: %', percentual;
+	ELSIF salario >= 1200.01 AND salario <= 2000.00 THEN 
+		reajuste := salario * 0.07;
+		novo_salario := salario + reajuste;
+		percentual := quote_literal('7%');
+		RAISE NOTICE 'Novo salário: %', novo_salario;
+		RAISE NOTICE 'Reajuste ganho: %', reajuste;
+		RAISE NOTICE 'Em percentual: %', percentual;
 	ELSE
-		lucro := valor_produto * 0.30;
-		valor_venda := valor_produto + lucro;
-		RAISE NOTICE 'O produto custou: %', valor_produto;
-		RAISE NOTICE 'O lucro vai ser de: %', lucro;
-		RAISE NOTICE 'O valor da venda vai ser: %', valor_venda;
+		reajuste := salario * 0.04;
+		novo_salario := salario + reajuste;
+		percentual := quote_literal('4%');
+		RAISE NOTICE 'Novo salário: %', novo_salario;
+		RAISE NOTICE 'Reajuste ganho: %', reajuste;
+		RAISE NOTICE 'Em percentual: %', percentual;
 	END IF;
 END;
 $$
+
+-- Ex04 com CASE
+-- DO $$ 
+-- DECLARE
+-- 	valor_produto NUMERIC(5,2):= valor_aleatorio_entre(1,50);
+-- 	lucro NUMERIC(5,2);
+-- 	valor_venda NUMERIC(5,2);
+-- BEGIN
+-- 	CASE 
+-- 		WHEN valor_produto < 20 THEN
+-- 		lucro := valor_produto * 0.45;
+-- 		valor_venda := valor_produto + lucro;
+-- 		RAISE NOTICE 'O produto custou: %', valor_produto;
+-- 		RAISE NOTICE 'O lucro vai ser de: %', lucro;
+-- 		RAISE NOTICE 'O valor da venda vai ser: %', valor_venda;
+-- 	ELSE
+-- 		lucro := valor_produto * 0.30;
+-- 		valor_venda := valor_produto + lucro;
+-- 		RAISE NOTICE 'O produto custou: %', valor_produto;
+-- 		RAISE NOTICE 'O lucro vai ser de: %', lucro;
+-- 		RAISE NOTICE 'O valor da venda vai ser: %', valor_venda;
+-- 	END CASE;
+-- END;
+-- $$
+
+-- Ex04 com IF
+-- DO $$
+-- DECLARE
+-- 	valor_produto NUMERIC(5,2):= valor_aleatorio_entre(1,50);
+-- 	lucro NUMERIC(5,2);
+-- 	valor_venda NUMERIC(5,2);
+-- BEGIN
+-- 	IF valor_produto < 20 THEN
+-- 		lucro := valor_produto * 0.45;
+-- 		valor_venda := valor_produto + lucro;
+-- 		RAISE NOTICE 'O produto custou: %', valor_produto;
+-- 		RAISE NOTICE 'O lucro vai ser de: %', lucro;
+-- 		RAISE NOTICE 'O valor da venda vai ser: %', valor_venda;
+-- 	ELSE
+-- 		lucro := valor_produto * 0.30;
+-- 		valor_venda := valor_produto + lucro;
+-- 		RAISE NOTICE 'O produto custou: %', valor_produto;
+-- 		RAISE NOTICE 'O lucro vai ser de: %', lucro;
+-- 		RAISE NOTICE 'O valor da venda vai ser: %', valor_venda;
+-- 	END IF;
+-- END;
+-- $$
 
 -- Ex 03 com CASE
 -- DO $$
